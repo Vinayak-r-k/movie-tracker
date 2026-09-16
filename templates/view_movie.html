@@ -1,0 +1,569 @@
+{#<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">#}
+{#<html xmlns="http://www.w3.org/1999/xhtml">#}
+{#<head>#}
+{#<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />#}
+{#<title>Untitled Document</title>#}
+{##}
+{#</head>#}
+{##}
+{#<body>#}
+{#<form method="GET">#}
+{#    <input type="text" name="q" placeholder="Search">#}
+{#    <button type="submit">Search</button>#}
+{#</form>#}
+{##}
+{#{% if movies %}#}
+{#    {% for movie in movies.results %}#}
+{##}
+{#        <h2>{{ movie.title }}</h2>#}
+{##}
+{#        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" width="200" height="300">#}
+{##}
+{#        <p>{{ movie.release_date }}</p>#}
+{#    {% endfor %}#}
+{#{% endif %}#}
+{##}
+{#</body>#}
+{#</html>#}
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url("/static/images/download (8).jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+        width:100%;
+        height: 100%;
+
+
+    }
+    .name 
+    {
+        width: 100%;
+        margin-left: 30px;
+        display: flex;
+        margin-top:15px;
+        font-size: 40px;
+    }
+    .peak
+    {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .peak p
+    {
+        width: 100px;
+        margin: 0%;
+
+        color: white;
+
+    }
+    .cinema
+    {
+        width: 130px;
+        color: #591160;
+{#margin-top: 15px;#}
+    }
+     .com
+    {
+        text-align: center;
+        margin-bottom: 10px;
+         width: 100px;
+        margin: 0%;
+
+        color: white;
+    }
+
+     .home
+     {
+         color: white;
+         margin-right: 20px;
+         margin-top: 10px;
+     }
+.search-bar
+{
+    margin-top: 10px;
+    margin-right: 20px;
+    display: flex;
+}
+    form {
+
+
+    }
+
+    .header{
+
+        display: flex;
+{#        padding-left: 1200px ;#}
+        height: 80px;
+        background-color: rebeccapurple;
+        justify-content: right;
+        padding-right: 30px;
+     
+
+
+
+
+
+    }
+    .header input
+    {
+        width:250px;
+        height: 50px;
+        border-radius:30px;
+        outline: hidden;
+        alignment: right;
+
+
+    }
+    .header button
+    {
+        background-color: #2e353f;
+
+        display: flex;
+        align-items: center  ;
+        color: grey;
+        width: 30px;
+        height: 30px;
+        border-radius: 20px;
+        border: transparent;
+
+    }
+    .search-icon p
+    {
+      display: flex;
+
+    }
+    .search-icon
+    {
+        padding-top: 15px;
+    }
+
+
+
+
+ .trending-now {
+    display: flex;
+    gap: 20px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    scroll-behavior: smooth;
+}
+    .trending-card img
+    {
+           flex-shrink: 0;
+        border-radius: 20px;
+
+    }
+    .movie
+    {
+    flex-shrink: 0;
+        height: 300px;
+    }
+    .trending-card
+    {
+    flex-shrink: 0;
+    }
+    .btn
+    {
+        display: flex;
+{#        justify-content: flex-end;#}
+        width: 100%;
+        gap:10px;
+        margin-top: 15px;
+
+{#        margin-bottom:px ;#}
+        
+    }
+
+ .right-btn
+ {
+     height: auto;
+     border-radius: 100%;
+     margin-right: 30px;
+ }
+    .left-btn{
+        height: auto;
+        border-radius: 100%;
+    }
+    .btn button
+    {
+        width: 40px;
+        height: 40px;
+        background:rebeccapurple ;
+        color: white;
+        border #591160 outset;
+    }
+
+
+.trending-now-text p{
+    display: flex;
+
+      gap:50px;
+    color: white;
+    height: auto;
+    margin-bottom: 0%;
+    width: 190px;
+    margin-top: 25px;
+}
+    .trending-now-text
+    {
+margin-top: 30px;
+         display: flex;
+        margin-bottom:20px;
+        font-size: 20px;
+
+
+
+    }
+    .trending-now-title
+    {
+        color: white;
+        width: 250px;
+    }
+    .trending-now-date
+    {
+        color: white;
+    }
+    .trending-now-title h6
+    {
+
+        text-align: center;
+        font-size: 20px;
+        margin:10px;
+
+    }
+    .trending-now-date h6
+    {
+        text-align: center;
+        margin-top: 5px;
+        font-size: 15px;
+
+    }
+    .movie h6
+    {
+        overflow-wrap: break-word;
+
+    }
+
+    .tv-trending
+    {
+        display: flex;
+    }
+    .monthly-hits-text
+    {
+        color: white;
+    width: 200px;
+
+    }
+    .monthly-hits{
+        display: flex;
+        column-gap :20px;
+        overflow-x: hidden;
+        overflow-y:hidden ;
+           scroll-behavior: smooth;
+
+
+    }
+       .tv{
+       flex-shrink: 0;
+           gap:0px;
+
+
+    }
+    .monthly-hits-card img
+    {
+        border-radius: 20px;
+
+    }
+    .monthly-hits-title
+    {
+
+        color: white;
+        text-align: center;
+        font-size: 30px;
+    }
+    .monthly-hits-title h6
+    {
+        margin: 20px;
+    }
+    .monthly-hits-date
+    {
+
+        color: white;
+        margin: 0px;
+        text-align: center;
+        font-size: 20px;
+
+    }
+    .monthly-hits-date h6
+    {
+        margin: 10px;
+    }
+
+
+    .btn
+    {
+        margin:0%;
+    }
+    .left-btn-m
+    {
+        border-radius: 100%;
+    }
+  .right-btn-m
+  {
+      border-radius: 100%;
+  }
+
+    a{
+      color: white;
+        text-decoration: none;
+    margin-top: 25px;
+        width: 90px;
+        margin-right: 10px;
+    }
+</style>
+</head>
+
+<body >
+
+
+
+
+
+
+<form method="get">
+    <div class="header">
+        <div class="name"><div class="peak">
+    <p>peak </div> <div class="cinema">cinema</div><div class="com">.com</div> </p>
+</div>
+        <form action="tvshow.html" method="get"><a href="" >tv shows</a>
+
+        </form>
+
+        <div class="home"><p>home</p></div>
+
+   <div class="search-bar"><input type="text" name="q" placeholder="Search...">
+        <div class="search-icon">
+            <button type="submit"> <p>🔎</p>︎︎</button></div>
+   </div> 
+        
+        
+        
+    </div>
+
+
+
+</form>
+<div class="trending-now-text">
+<p>Trending movies🔥</p>
+<div class="btn">
+    <div class="left-btn"><button id="left-btn" class="left-btn"><</button></div>
+   <div class="right-btn"> <button id="right-btn" class="right-btn">></button></div>
+</div>
+</div>
+<div class="trending-now" id="movie-row">
+
+{% for movie in movies %}
+    <div class="movie">
+        <div class="trending-card"> <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" height="150" width="250"></div>
+        <div class="trending-now-title"> <h6>{{ movie.title }}</h6></div>
+    <div class="trending-now-date" > <h6>{{ movie.release_date|slice:":4"  }}</h6></div>
+    </div>
+{% endfor %}
+</div>
+
+
+
+
+
+<div class="tv-trending">
+
+       <div class="monthly-hits-text">
+    <p>trending shows🔥</p></div>
+<div class="btn">
+    <div class="left-btn-m"><button id="left-btn-m" class="left-btn-m"><</button></div>
+   <div class="right-btn-m"> <button id="right-btn-m" class="right-btn-m">></button></div>
+</div>
+
+</div>
+
+
+<div class="monthly-hits" id="movie-row-m">
+
+{% for movie in tv %}
+    <div class="tv">
+        <div class="monthly-hits-card"> <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" height="150" width="250"></div>
+        <div class="monthly-hits-title"> <h6>{{ movie.original_name }}</h6></div>
+    <div class="monthly-hits-date" > <h6>{{ movie.first_air_date|slice:":4"  }}</h6></div>
+    </div>
+{% endfor %}
+</div>
+
+
+
+
+<br>
+
+
+<br>
+
+<script>
+
+const movieRow = document.getElementById("movie-row");
+
+document.getElementById("left-btn").onclick = () => {
+        clearInterval(autoScroll);
+    movieRow.scrollBy({
+        left: -400,
+        behavior: "smooth"
+    });
+};
+
+document.getElementById("right-btn").onclick = () => {
+        clearInterval(autoScroll);
+    movieRow.scrollBy({
+        left: 400,
+        behavior: "smooth"
+    });
+};/**
+ * Created by vinay on 20-07-2026.
+ */
+{#setInterval(() => {#}
+{#    if (movieRow.scrollLeft + movieRow.clientWidth >= movieRow.scrollWidth - 5) {#}
+{#        movieRow.scrollTo({#}
+{#            left: 0,#}
+{#            behavior: "smooth"#}
+{#        });#}
+{#    } else {#}
+{#        movieRow.scrollBy({#}
+{#            left: 270,#}
+{#            behavior: "smooth"#}
+{#        });#}
+{#    }#}
+{#{, 3000);#}
+
+
+
+
+const step = 270;       // Distance to move
+const duration = 1000;  // Scroll duration in milliseconds (2 seconds)
+
+function smoothScrollBy(element, distance, duration) {
+    const start = element.scrollLeft;
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Ease in-out
+        const ease = progress < 0.5
+            ? 2 * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+        element.scrollLeft = start + distance * ease;
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
+{#setInterval(() => {#}
+const autoScroll = setInterval(() => {
+    if (movieRow.scrollLeft + movieRow.clientWidth >= movieRow.scrollWidth - 5) {
+        movieRow.scrollTo({
+            left: 0,
+            behavior: "instant"
+        });
+    } else {
+        smoothScrollBy(movieRow, step, duration);
+    }
+}, 2500); // Wait 5 seconds before the next scroll
+
+
+
+
+
+
+
+
+
+    const movieRowm = document.getElementById("movie-row-m");
+
+document.getElementById("left-btn-m").onclick = () => {
+    clearInterval(autoScrollw);
+    movieRowm.scrollBy({
+        left: -400,
+        behavior: "smooth"
+    });
+
+
+};
+
+document.getElementById("right-btn-m").onclick = () => {
+    clearInterval(autoScrollw);
+    movieRowm.scrollBy({
+        left: 400,
+        behavior: "smooth"
+    });
+};
+
+
+
+
+
+
+
+function smoothScrollBy(element, distance, duration) {
+    const start = element.scrollLeft;
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Ease in-out
+        const ease = progress < 0.5
+            ? 2 * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+        element.scrollLeft = start + distance * ease;
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
+{#setInterval(() => {#}
+const autoScrollw = setInterval(() => {
+    if (movieRowm.scrollLeft + movieRowm.clientWidth >= movieRowm.scrollWidth - 5) {
+        movieRowm.scrollTo({
+            left: 0,
+            behavior: "instant"
+        });
+    } else {
+        smoothScrollBy(movieRowm, step, duration);
+    }
+}, 2500);
+</script>
+
+</body>
+</html>
